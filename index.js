@@ -1,15 +1,14 @@
-function createEmployeeRecord(){
-    let employee = {
-        firstName: "firstName",
-        familyName: "familyName",
-        title: "title",
-        payPerHour: Number        
+function createEmployeeRecord(employee){
+    let employeeData = {
+        firstName: employee[0],
+        familyName: employee[1],
+        title: employee[2],
+        payPerHour: employee[3],
     }
-    // let timeIn = Object.keys([])
-    // let timeOut = Object.keys([])
-    let employeeData = Object.values(employee)
-    console.log(employeeData)
-        return employeeData, timeIn, timeOut
+
+    let timeEvent = {timeInEvents: [], timeOutEvents: []}
+    console.log(employeeData, timeEvent)
+        return [employeeData, timeEvent]
 }
 
 // function createEmployeeRecords(){
