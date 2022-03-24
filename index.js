@@ -1,4 +1,4 @@
-function createEmployeeRecord(employeeArray){
+function createEmployeeRecord(employeeArray) {
     let employeeObject = {
         firstName: employeeArray[0],
         familyName: employeeArray[1],
@@ -10,13 +10,13 @@ function createEmployeeRecord(employeeArray){
     return employeeObject
 }
 
-function createEmployeeRecords(employeeArrays){
+function createEmployeeRecords(employeeArrays) {
     return employeeArrays.map(x => createEmployeeRecord(x))
 }
 
-function createTimeInEvent(employeeObject, dateStamp){
-    let timeData = dateStamp.split(" ") 
-    let date = timeData[0] 
+function createTimeInEvent(employeeObject, dateStamp) {
+    let timeData = dateStamp.split(" ")
+    let date = timeData[0]
     let hour = parseInt(timeData[1])
     let time = {
         type: "TimeIn",
@@ -27,7 +27,7 @@ function createTimeInEvent(employeeObject, dateStamp){
     return employeeObject
 }
 
-function createTimeOutEvent(employeeObject, dateStamp){
+function createTimeOutEvent(employeeObject, dateStamp) {
     let timeData = dateStamp.split(" ")
     let date = timeData[0]
     let hour = parseInt(timeData[1])
@@ -40,22 +40,34 @@ function createTimeOutEvent(employeeObject, dateStamp){
     return employeeObject
 }
 
-function hoursWorkedOnDate(employee, dateForm){
-    let timeIn = employee.timeInEvents.find(function (e){
-        
+function hoursWorkedOnDate(employee, dateForm) {
+    let timeIn = employee.timeInEvents.find(function (e) {
+
         return dateForm === e.date
     })
-    let timeOut = employee.timeOutEvents.find(function (e){
-        return dateForm === e.date 
+    let timeOut = employee.timeOutEvents.find(function (e) {
+        return dateForm === e.date
     })
     let clockInTime = parseInt(timeIn.hour)
     let clockOutTime = parseInt(timeOut.hour)
     return (clockOutTime - clockInTime) * .01
 }
 
-function wagesEarnedOnDate(employeeObject, date){
-    hoursWorkedOnDate(clockInTime, clockOutTime) 
-    console.log(clockOutTime - clockInTime)
+function wagesEarnedOnDate(employee, dateform) {
+    let pay = employee.payPerHour
+    return hoursWorkedOnDate(employee, dateform) * pay
+}
 
-    
+function allWagesFor(employee) {
+    let total = 0
+    for (let i = 0; i < employee.timeInEvents.length; i++) {
+        const wages = wagesEarnedOnDate(employee, employee.timeInEvents[i].date);
+        total += wages;
+        console.log(wages)
+    }
+    return total
+}
+
+function calculatePayroll(employeeArray) {
+
 }
