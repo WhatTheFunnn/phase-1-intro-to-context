@@ -40,11 +40,22 @@ function createTimeOutEvent(employeeObject, dateStamp){
     return employeeObject
 }
 
-function hoursWorkedOnDate(employeeObject, dateForm){
-    let timeIn = employeeObject.timeInEvents`${hour}`
-    //let hoursWorked = 
+function hoursWorkedOnDate(employee, dateForm){
+    let timeIn = employee.timeInEvents.find(function (e){
+        
+        return dateForm === e.date
+    })
+    let timeOut = employee.timeOutEvents.find(function (e){
+        return dateForm === e.date 
+    })
+    let clockInTime = parseInt(timeIn.hour)
+    let clockOutTime = parseInt(timeOut.hour)
+    return (clockOutTime - clockInTime) * .01
+}
+
+function wagesEarnedOnDate(employeeObject, date){
+    hoursWorkedOnDate(clockInTime, clockOutTime) 
+    console.log(clockOutTime - clockInTime)
+
     
-    // let timeOut = employeeObject.timeOutEvents
-    console.log(timeIn)
-    return createTimeInEvent
 }
