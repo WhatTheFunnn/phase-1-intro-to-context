@@ -61,13 +61,18 @@ function wagesEarnedOnDate(employee, dateform) {
 function allWagesFor(employee) {
     let total = 0
     for (let i = 0; i < employee.timeInEvents.length; i++) {
-        const wages = wagesEarnedOnDate(employee, employee.timeInEvents[i].date);
+        let wages = wagesEarnedOnDate(employee, employee.timeInEvents[i].date);
         total += wages;
-        console.log(wages)
     }
     return total
 }
 
-function calculatePayroll(employeeArray) {
+const calculatePayroll = function(employeeArray){
+    let payroll = [];
 
+    employeeArray.forEach(employee => {
+        payroll.push(allWagesFor(employee)) 
+    });
+
+    return payroll.reduce((previousValue, currentValue) => previousValue + currentValue)
 }
